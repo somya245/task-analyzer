@@ -2,6 +2,7 @@ from pathlib import Path
 import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 SECRET_KEY = 'django-insecure-smart-task-analyzer-internship-2025'
 DEBUG = True
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
@@ -30,10 +31,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'task_analyzer.urls'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / '../frontend'],  # ADDED: Look for templates in frontend directory
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -47,6 +49,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'task_analyzer.wsgi.application'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -55,17 +58,31 @@ DATABASES = {
 }
 
 AUTH_PASSWORD_VALIDATORS = [
-    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
 ]
 
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
+
+# ADDED: Static files configuration
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / '../frontend',  # Serve files from frontend directory
+]
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
@@ -75,9 +92,10 @@ REST_FRAMEWORK = {
 }
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:8000',
-    'http://127.0.0.1:8000',
-    'http://localhost:8001',
-    'http://127.0.0.1:8001',
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+    "http://localhost:8001",
+    "http://127.0.0.1:8001",
 ]
+
 CORS_ALLOW_ALL_ORIGINS = True
